@@ -33,8 +33,8 @@
       <v-col cols="6" offset="1"> </v-col>
 
       <v-col cols="12">
-        <v-btn @click="$emit('cancle')"> 취소 </v-btn>
-        <v-btn @click="addEthereumChain"> 저장 </v-btn>
+        <v-btn @click="$emit('cancel')" class="mx-2"> 취소 </v-btn>
+        <v-btn @click="addEthereumChain" class="mx-2"> 확인 </v-btn>
       </v-col>
     </v-row>
   </v-container>

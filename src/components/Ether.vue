@@ -36,13 +36,17 @@
         <v-btn @click="getGasPrice" color="green" class="ma-2">
           Get GasPrice
         </v-btn>
-        <v-btn @click="showComponent = 'EtherChain'" color="green" class="ma-2">
+        <v-btn @click="showComponent = 'EtherChain'" color="blue" class="ma-2">
           Add Chain
         </v-btn>
-        <v-btn @click="switchChain" color="green" class="ma-2">
+        <v-btn @click="showComponent = 'EtherSwitch'" color="blue" class="ma-2">
           Switch Chain
         </v-btn>
-        <v-btn @click="sendTransaction" color="green" class="ma-2">
+        <v-btn
+          @click="showComponent = 'EtherTransaction'"
+          color="blue"
+          class="ma-2"
+        >
           Send Transaction
         </v-btn>
         <v-btn @click="requestPermission" color="green" class="ma-2">
@@ -60,7 +64,19 @@
     <v-row>
       <EtherChain
         v-if="showComponent == 'EtherChain'"
-        @cancle="showComponent = 'none'"
+        @cancel="showComponent = 'none'"
+        @success="showComponent = 'none'"
+        :ethereum="ethereum"
+      />
+      <EtherTransaction
+        v-if="showComponent == 'EtherTransaction'"
+        @cancel="showComponent = 'none'"
+        @success="showComponent = 'none'"
+        :ethereum="ethereum"
+      />
+      <EtherSwitch
+        v-if="showComponent == 'EtherSwitch'"
+        @cancel="showComponent = 'none'"
         @success="showComponent = 'none'"
         :ethereum="ethereum"
       />
@@ -70,13 +86,18 @@
 
 <script>
 import EtherChain from "@/components/Ether/EtherChain";
+import EtherTransaction from "@/components/Ether/EtherTransaction";
+import EtherSwitch from "@/components/Ether/EtherSwitch";
+
 import MetaMaskOnboarding from "@metamask/onboarding";
 
 export default {
   name: "Ether",
 
   components: {
-    EtherChain
+    EtherChain,
+    EtherTransaction,
+    EtherSwitch
   },
   data: () => ({
     ethereum: null,
@@ -94,6 +115,10 @@ export default {
       return this.ethereum ? this.ethereum.networkVersion : "None";
     },
     isMetaMask() {
+      console.log(
+        "MetaMaskOnboarding.isMetaMaskInstalled()",
+        MetaMaskOnboarding.isMetaMaskInstalled()
+      );
       return MetaMaskOnboarding.isMetaMaskInstalled();
     }
   },

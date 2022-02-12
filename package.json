@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@metamask/onboarding": "^1.0.1",
+    "@walletconnect/qrcode-modal": "^1.7.1",
     "core-js": "^3.6.5",
     "ganache-cli": "^6.12.2",
     "vue": "^2.6.11",
